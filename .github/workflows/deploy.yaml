@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths-ignore:
       - '**.md'
+      - 'helm/**'
 
 jobs:
   # Build and Test
@@ -48,7 +49,6 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/my-go-app:${{ github.sha }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/my-go-app:latest
 
   deploy:
     name: Update Helm Values
