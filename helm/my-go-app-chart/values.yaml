@@ -1,5 +1,5 @@
 image:
   repository: ifeolaitan/my-go-app
-  tag: "f4080b8ed5ddf0e7266a3888072b2d339bad8e5a"
+  tag: "26f231223a51f8762e61d83386d356cf7c5fb243"
   pullPolicy: Always
 replicaCount: 3
