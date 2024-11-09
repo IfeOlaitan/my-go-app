@@ -9,6 +9,7 @@ on:
 jobs:
   # Build and Test
   build:
+    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +22,7 @@ jobs:
           go-version: 1.22
 
       - name: Build
-        run: go build -o go-web-app-main
+        run: go build -o my-go-app
 
       - name: Test
         run: go test ./...
@@ -46,8 +47,8 @@ jobs:
         with:
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/go-app:${{ github.sha }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/go-app:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/my-go-app:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/my-go-app:latest
 
   deploy:
     name: Update Helm Values
