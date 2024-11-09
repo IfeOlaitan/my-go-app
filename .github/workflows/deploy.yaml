@@ -7,8 +7,29 @@ on:
       - '**.md'
 
 jobs:
+  # Build and Test
   build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go 1.22
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.22
+
+      - name: Build
+        run: go build -o go-web-app-main
+
+      - name: Test
+        run: go test ./...
+
+  # Build and Push Docker Image
+  push:
     name: Build and Push Docker Image
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -30,11 +51,13 @@ jobs:
 
   deploy:
     name: Update Helm Values
-    needs: build
+    needs: push
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Helm values
         run: |
