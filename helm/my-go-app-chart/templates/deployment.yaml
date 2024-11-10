@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-go-app-deployment
+  namespace: my-gp-app
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
